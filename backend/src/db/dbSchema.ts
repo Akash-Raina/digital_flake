@@ -1,5 +1,5 @@
 export interface IAdmin{
-    emai: string,
+    email : string,
     password: string
 }
 
@@ -9,7 +9,7 @@ export interface IUser{
     mobile: number,
     email: string,
     role: string,
-    status: "Active" | "Inactive",
+    status: "active" | "inactive",
     img_upload: string
 }
 
@@ -18,3 +18,4 @@ export interface IRole{
     role: string,
     status: string
 }
+

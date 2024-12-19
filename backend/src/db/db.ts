@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { IAdmin, IRole, IUser } from "./dbSchema";
 import dotenv from "dotenv";
 import autoIncrementFactory from 'mongoose-sequence';
@@ -13,12 +13,12 @@ const AdminSchema = new mongoose.Schema({
 })
 
 const UserSchema = new mongoose.Schema({
-    id: {type: Number, required:true},
+    id: {type: Number},
     name: {type: String, required:true},
     mobile:{type: Number, required:true},
     email: {type: String, required: true},
     role: {type: String, required: true},
-    status: {type:String, enum:["Active, Inactive"], required: true},
+    status: {type:String, enum:["Active", "Inactive"], required: true},
     img_upload: {type: String, required: true}
 })
 UserSchema.plugin(AutoIncrement, {inc_field: 'id'})

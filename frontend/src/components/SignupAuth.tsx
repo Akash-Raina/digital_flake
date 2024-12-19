@@ -1,9 +1,11 @@
 import { useState } from "react"
 import axios from "axios"
+import BACKEND_URL from "../../config"
 import { useNavigate } from "react-router-dom"
 import { LabbledInput } from "../components/LabbledInput";
 import { Button } from "../components/Button";
 export const SignupAuth = ()=>{
+    const [state, setState] = useState(false)
     const navigate = useNavigate();
     const [input, getInput] = useState({
         email: "",
@@ -12,15 +14,19 @@ export const SignupAuth = ()=>{
 
     const SubmitButton = async()=>{
        try{
-        const response = await axios.post("http://localhost:3000/signup", {
+        setState(true)
+        const response = await axios.post(`${BACKEND_URL}/admin/signup`, {
             email: input.email,
             password: input.password
         })
+        setState(false)
         const jwt = response.data.token;
         localStorage.setItem("token", jwt);
         navigate('/')
        }
        catch(err){
+        setState(false)
+        alert('wrong input value or email aldready exists')
         console.log(err)
        }
 
@@ -36,7 +42,7 @@ export const SignupAuth = ()=>{
         password: e.target.value
     })}} label="Password" />
 
-    <Button onClick={SubmitButton} type="Signup"/>
+    <Button state= {state} onClick={SubmitButton} type="Signup" className="rounded-xl w-[50%] mt-10 mb-5 h-10 bg-[#5C218B] text-white"/>
 
 </div>
 }

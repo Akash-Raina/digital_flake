@@ -50,7 +50,7 @@ export const LoginValidation:RequestHandler = async(req, res, next)=>{
             })
         } else if (result){}
         else {
-            return res.status(401).json({msg: "Passwords do not match."});
+            return res.status(401);
         }
     });
     next();
